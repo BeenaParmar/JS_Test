@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="productform">
+        <input id="name" type="text" placeholder="Name" ><br><br>
+        <input type="number" id="price" placeholder="Price"><br><br>
+        <input type="number" id="quantity" placeholder="quantity"><br><br>
+        <button type="submit" id="button">Submit<br><br>
+        </button>
+        <p id="message"></p>
+    </form>
+    <script>
+        document.getElementById("productform").addEventListener("button",function (e){
+            e.preventDefault();
+        let name = document.getElementById("name").value.trim();
+        let price = document.getElementById("price").value;
+        let quantity = document.getElementById("quantity").value;
+        let message = document.getElementById("message");
+
+        let namePattern =/^[A-Za-z]+$/;
+        let pricePattern =/^(?=.*\d).{1,}$/;
+        let quantityPattern =/^(?=.*\d).{1,}$/;
+
+        if (!namePattern.test(name)){
+            message.textContent ="Enter valid name without digits";
+        }
+        else if(!pricePattern.test(price)){
+            message.textContent ="price should not be -ve";
+        }
+        else if(!quantityPattern.test(quantity)){
+            message.textContent ="quantity should not be -ve";
+        }
+        else{
+        localStorage.setItem("name",name)
+        localStorage.setItem("price",price)
+        localStorage.setItem("quantity",quantity)
+        message.textContent ="form submiteed successfully...";
+        }
+
+        });
+
+    </script>
+</body>
+</html>

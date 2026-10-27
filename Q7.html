@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <form id="myForm">
+        <input type="text" id="name" placeholder="Enter Name"><br><br>
+        <input type="email" id="email" placeholder="Enter Email"><br><br>
+        <input type="password" id="password" placeholder="Enter Password"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value;
+            let message = document.getElementById("message");
+
+            let namePattern = /^[A-Za-z]+$/;
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+            if (!namePattern.test(name)) {
+                message.textContent = "Name must contain only alphabetic characters.";
+            } else if (!emailPattern.test(email)) {
+                message.textContent = "Enter a valid email.";
+            } else if (!passwordPattern.test(password)) {
+                message.textContent = "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one digit.";
+            } else {
+                localStorage.setItem("name", name);
+                localStorage.setItem("email", email);
+                message.textContent = "Form submitted successfully!";
+            }
+        });
+    </script>
+</body>
+</html>
